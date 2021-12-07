@@ -3,8 +3,8 @@ from typing import List, Tuple
 
 import common
 
-INPUT = 'input.txt'
-# INPUT = 'sample.txt'
+# INPUT = 'input.txt'
+INPUT = 'sample.txt'
 LINES = common.read_input(INPUT)
 
 GRID = [[]]
@@ -37,6 +37,10 @@ def is_vertical(left, right):
     return left[0] == right[0]
 
 
+def is_diagonal(left, right):
+    return (left[0] - right[0]) == (left[1] - right[1])
+
+
 def fill_grid(coordinate_pairs: List[Tuple[Tuple[int, int], Tuple[int, int]]]) -> None:
     for left, right in coordinate_pairs:
         if is_horizontal(left, right):
@@ -45,12 +49,18 @@ def fill_grid(coordinate_pairs: List[Tuple[Tuple[int, int], Tuple[int, int]]]) -
             rx = right[0]
             for x in range(min(lx, rx), max(lx, rx)+1):
                 GRID[y][x] += 1
-        if is_vertical(left, right):
+        elif is_vertical(left, right):
             x = left[0]
             ly = left[1]
             ry = right[1]
             for y in range(min(ly, ry), max(ly, ry)+1):
                 GRID[y][x] += 1
+        elif is_diagonal(left, right):
+            lx, ly = left
+            rx, ry = right
+            for x in range(min(lx, rx), max(lx, rx)+1):
+                for y in range(min(ly, ry), max(ly, ry)+1):
+                    GRID[y][x] += 1
 
 
 def count_greater_than_one(grid: List[List[int]]) -> int:
@@ -67,5 +77,5 @@ if __name__ == '__main__':
     max_x, max_y = find_max_xy(coordinate_pairs)
     GRID = [[0]*(max_x+1) for _ in range(max_y+1)]
     fill_grid(coordinate_pairs)
-    # pprint(GRID)
+    pprint(GRID)
     print(count_greater_than_one(GRID))
