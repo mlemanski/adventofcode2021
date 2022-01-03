@@ -4,7 +4,7 @@ import common
 
 INPUT = 'input.txt'
 # INPUT = 'sample.txt'
-lines = common.read_input(INPUT)
+lines = common.read_lines(INPUT)
 
 
 def get_target(num_ones, num_zeros, is_most_common):

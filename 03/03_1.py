@@ -1,6 +1,6 @@
 import common
 
-lines = common.read_input('input.txt')
+lines = common.read_lines('input.txt')
 transposed = [list(i) for i in zip(*lines)]
 
 frequent_bits = ''

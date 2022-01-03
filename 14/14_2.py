@@ -3,5 +3,5 @@ import common
 
 INPUT = 'input.txt'
 # INPUT = 'sample.txt'
-LINES = common.read_input(INPUT)
+LINES = common.read_lines(INPUT)
 
